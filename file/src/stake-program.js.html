@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/stake-program.js | Solana Javascript API</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  <script src="script/manual.js"></script>
+<link rel="stylesheet" href="./inject/css/0-theme.css"><meta name="description" content="Solana Javascript API"><meta property="twitter:card" content="summary"><meta property="twitter:title" content="Solana Javascript API"><meta property="twitter:description" content="Solana Javascript API"></head>
+<body class="layout-container" data-ice="rootContainer">
+
+<header>
+  <a href="./">Home</a>
+  
+  <a href="identifiers.html">Reference</a>
+  <a href="source.html">Source</a>
+  
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+<a style="position:relative; top:3px;" href="https://github.com/solana-labs/solana-web3.js"><img width="20px" src="./image/github.png"></a></header>
+
+<nav class="navigation" data-ice="nav"><div>
+  <ul>
+    
+  <li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/account.js~Account.html">Account</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/bpf-loader.js~BpfLoader.html">BpfLoader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/budget-program.js~BudgetProgram.html">BudgetProgram</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/connection.js~Connection.html">Connection</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/loader.js~Loader.html">Loader</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/nonce-account.js~NonceAccount.html">NonceAccount</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/publickey.js~PublicKey.html">PublicKey</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/stake-program.js~Authorized.html">Authorized</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/stake-program.js~Lockup.html">Lockup</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/stake-program.js~StakeInstruction.html">StakeInstruction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/stake-program.js~StakeProgram.html">StakeProgram</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/system-program.js~SystemInstruction.html">SystemInstruction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/system-program.js~SystemProgram.html">SystemProgram</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/transaction.js~Transaction.html">Transaction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/transaction.js~TransactionInstruction.html">TransactionInstruction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/validator-info.js~ValidatorInfo.html">ValidatorInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-class">C</span><span data-ice="name"><span><a href="class/src/vote-account.js~VoteAccount.html">VoteAccount</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-encodeData">encodeData</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-authorized">authorized</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getAlloc">getAlloc</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-lockup">lockup</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-publicKey">publicKey</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-rustString">rustString</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-uint64">uint64</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-GetConfirmedBlockRpcResult">GetConfirmedBlockRpcResult</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-LAMPORTS_PER_SOL">LAMPORTS_PER_SOL</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-STAKE_CONFIG_ID">STAKE_CONFIG_ID</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-StakeAuthorizationLayout">StakeAuthorizationLayout</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-StakeInstructionLayout">StakeInstructionLayout</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SYSVAR_CLOCK_PUBKEY">SYSVAR_CLOCK_PUBKEY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SYSVAR_RECENT_BLOCKHASHES_PUBKEY">SYSVAR_RECENT_BLOCKHASHES_PUBKEY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SYSVAR_RENT_PUBKEY">SYSVAR_RENT_PUBKEY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SYSVAR_REWARDS_PUBKEY">SYSVAR_REWARDS_PUBKEY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-SYSVAR_STAKE_HISTORY_PUBKEY">SYSVAR_STAKE_HISTORY_PUBKEY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-PACKET_DATA_SIZE">PACKET_DATA_SIZE</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-VALIDATOR_INFO_KEY">VALIDATOR_INFO_KEY</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-VOTE_PROGRAM_ID">VOTE_PROGRAM_ID</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Blockhhash">Blockhhash</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-BudgetCondition">BudgetCondition</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Payment">Payment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-SignatureCondition">SignatureCondition</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TimestampCondition">TimestampCondition</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-AccountInfo">AccountInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Commitment">Commitment</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ConfirmedBlock">ConfirmedBlock</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-ContactInfo">ContactInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-EpochInfo">EpochInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-EpochSchedule">EpochSchedule</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Inflation">Inflation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-KeyedAccountInfo">KeyedAccountInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-SignatureSuccess">SignatureSuccess</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TransactionError">TransactionError</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Version">Version</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-VoteAccountInfo">VoteAccountInfo</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-VoteAccountStatus">VoteAccountStatus</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-FeeCalculator">FeeCalculator</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-InstructionType">InstructionType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-StakeAuthorizationType">StakeAuthorizationType</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-NonceInformation">NonceInformation</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TransactionCtorFields">TransactionCtorFields</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TransactionInstructionCtorFields">TransactionInstructionCtorFields</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-TransactionSignature">TransactionSignature</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-typedef">T</span><span data-ice="name"><span><a href="typedef/index.html#static-typedef-Info">Info</a></span></span></li>
+<li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#util">util</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sendAndConfirmRawTransaction">sendAndConfirmRawTransaction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sendAndConfirmRecentTransaction">sendAndConfirmRecentTransaction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sendAndConfirmTransaction">sendAndConfirmTransaction</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-decodeLength">decodeLength</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-encodeLength">encodeLength</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-sleep">sleep</a></span></span></li>
+<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-testnetChannelEndpoint">testnetChannelEndpoint</a></span></span></li>
+</ul>
+</div>
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/stake-program.js</h1>
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">// @flow
+
+import * as BufferLayout from &apos;buffer-layout&apos;;
+
+import {encodeData} from &apos;./instruction&apos;;
+import type {InstructionType} from &apos;./instruction&apos;;
+import * as Layout from &apos;./layout&apos;;
+import {PublicKey} from &apos;./publickey&apos;;
+import {SystemProgram} from &apos;./system-program&apos;;
+import {
+  SYSVAR_CLOCK_PUBKEY,
+  SYSVAR_RENT_PUBKEY,
+  SYSVAR_STAKE_HISTORY_PUBKEY,
+} from &apos;./sysvar&apos;;
+import {Transaction, TransactionInstruction} from &apos;./transaction&apos;;
+import type {TransactionInstructionCtorFields} from &apos;./transaction&apos;;
+
+export const STAKE_CONFIG_ID = new PublicKey(
+  &apos;StakeConfig11111111111111111111111111111111&apos;,
+);
+
+export class Authorized {
+  staker: PublicKey;
+  withdrawer: PublicKey;
+
+  /**
+   * Create a new Authorized object
+   */
+  constructor(staker: PublicKey, withdrawer: PublicKey) {
+    this.staker = staker;
+    this.withdrawer = withdrawer;
+  }
+}
+
+export class Lockup {
+  unixTimestamp: number;
+  epoch: number;
+  custodian: PublicKey;
+
+  /**
+   * Create a new Lockup object
+   */
+  constructor(unixTimestamp: number, epoch: number, custodian: PublicKey) {
+    this.unixTimestamp = unixTimestamp;
+    this.epoch = epoch;
+    this.custodian = custodian;
+  }
+}
+
+/**
+ * Stake Instruction class
+ */
+export class StakeInstruction extends TransactionInstruction {
+  /**
+   * Type of StakeInstruction
+   */
+  type: InstructionType;
+
+  constructor(opts?: TransactionInstructionCtorFields, type?: InstructionType) {
+    if (
+      opts &amp;&amp;
+      opts.programId &amp;&amp;
+      !opts.programId.equals(StakeProgram.programId)
+    ) {
+      throw new Error(&apos;programId incorrect; not a StakeInstruction&apos;);
+    }
+    super(opts);
+    if (type) {
+      this.type = type;
+    }
+  }
+
+  static from(instruction: TransactionInstruction): StakeInstruction {
+    if (!instruction.programId.equals(StakeProgram.programId)) {
+      throw new Error(&apos;programId incorrect; not StakeProgram&apos;);
+    }
+
+    const instructionTypeLayout = BufferLayout.u32(&apos;instruction&apos;);
+    const typeIndex = instructionTypeLayout.decode(instruction.data);
+    let type;
+    for (const t in StakeInstructionLayout) {
+      if (StakeInstructionLayout[t].index == typeIndex) {
+        type = StakeInstructionLayout[t];
+      }
+    }
+    if (!type) {
+      throw new Error(&apos;Instruction type incorrect; not a StakeInstruction&apos;);
+    }
+    return new StakeInstruction(
+      {
+        keys: instruction.keys,
+        programId: instruction.programId,
+        data: instruction.data,
+      },
+      type,
+    );
+  }
+}
+
+/**
+ * An enumeration of valid StakeInstructionTypes
+ */
+export const StakeInstructionLayout = Object.freeze({
+  Initialize: {
+    index: 0,
+    layout: BufferLayout.struct([
+      BufferLayout.u32(&apos;instruction&apos;),
+      Layout.authorized(),
+      Layout.lockup(),
+    ]),
+  },
+  Authorize: {
+    index: 1,
+    layout: BufferLayout.struct([
+      BufferLayout.u32(&apos;instruction&apos;),
+      Layout.publicKey(&apos;newAuthorized&apos;),
+      BufferLayout.u32(&apos;stakeAuthorizationType&apos;),
+    ]),
+  },
+  DelegateStake: {
+    index: 2,
+    layout: BufferLayout.struct([BufferLayout.u32(&apos;instruction&apos;)]),
+  },
+  Split: {
+    index: 3,
+    layout: BufferLayout.struct([
+      BufferLayout.u32(&apos;instruction&apos;),
+      BufferLayout.ns64(&apos;lamports&apos;),
+    ]),
+  },
+  Withdraw: {
+    index: 4,
+    layout: BufferLayout.struct([
+      BufferLayout.u32(&apos;instruction&apos;),
+      BufferLayout.ns64(&apos;lamports&apos;),
+    ]),
+  },
+  Deactivate: {
+    index: 5,
+    layout: BufferLayout.struct([BufferLayout.u32(&apos;instruction&apos;)]),
+  },
+});
+
+/**
+ * @typedef {Object} StakeAuthorizationType
+ * @property (index} The Stake Authorization index (from solana-stake-program)
+ */
+export type StakeAuthorizationType = {|
+  index: number,
+|};
+
+/**
+ * An enumeration of valid StakeInstructionTypes
+ */
+export const StakeAuthorizationLayout = Object.freeze({
+  Staker: {
+    index: 0,
+  },
+  Withdrawer: {
+    index: 1,
+  },
+});
+
+/**
+ * Factory class for transactions to interact with the Stake program
+ */
+export class StakeProgram {
+  /**
+   * Public key that identifies the Stake program
+   */
+  static get programId(): PublicKey {
+    return new PublicKey(&apos;Stake11111111111111111111111111111111111111&apos;);
+  }
+
+  /**
+   * Max space of a Stake account
+   */
+  static get space(): number {
+    return 4008;
+  }
+
+  /**
+   * Generate an Initialize instruction to add to a Stake Create transaction
+   */
+  static initialize(
+    stakeAccount: PublicKey,
+    authorized: Authorized,
+    lockup: Lockup,
+  ): TransactionInstruction {
+    const type = StakeInstructionLayout.Initialize;
+    const data = encodeData(type, {
+      authorized: {
+        staker: authorized.staker.toBuffer(),
+        withdrawer: authorized.withdrawer.toBuffer(),
+      },
+      lockup: {
+        unixTimestamp: lockup.unixTimestamp,
+        epoch: lockup.epoch,
+        custodian: lockup.custodian.toBuffer(),
+      },
+    });
+    const instructionData = {
+      keys: [
+        {pubkey: stakeAccount, isSigner: false, isWritable: true},
+        {pubkey: SYSVAR_RENT_PUBKEY, isSigner: false, isWritable: false},
+      ],
+      programId: this.programId,
+      data,
+    };
+    return new TransactionInstruction(instructionData);
+  }
+
+  /**
+   * Generate a Transaction that creates a new Stake account at
+   *   an address generated with `from`, a seed, and the Stake programId
+   */
+  static createAccountWithSeed(
+    from: PublicKey,
+    stakeAccount: PublicKey,
+    base: PublicKey,
+    seed: string,
+    authorized: Authorized,
+    lockup: Lockup,
+    lamports: number,
+  ): Transaction {
+    let transaction = SystemProgram.createAccountWithSeed(
+      from,
+      stakeAccount,
+      base,
+      seed,
+      lamports,
+      this.space,
+      this.programId,
+    );
+
+    return transaction.add(this.initialize(stakeAccount, authorized, lockup));
+  }
+
+  /**
+   * Generate a Transaction that creates a new Stake account
+   */
+  static createAccount(
+    from: PublicKey,
+    stakeAccount: PublicKey,
+    authorized: Authorized,
+    lockup: Lockup,
+    lamports: number,
+  ): Transaction {
+    let transaction = SystemProgram.createAccount(
+      from,
+      stakeAccount,
+      lamports,
+      this.space,
+      this.programId,
+    );
+
+    return transaction.add(this.initialize(stakeAccount, authorized, lockup));
+  }
+
+  /**
+   * Generate a Transaction that delegates Stake tokens to a validator
+   * Vote PublicKey. This transaction can also be used to redelegate Stake
+   * to a new validator Vote PublicKey.
+   */
+  static delegate(
+    stakeAccount: PublicKey,
+    authorizedPubkey: PublicKey,
+    votePubkey: PublicKey,
+  ): Transaction {
+    const type = StakeInstructionLayout.DelegateStake;
+    const data = encodeData(type);
+
+    return new Transaction().add({
+      keys: [
+        {pubkey: stakeAccount, isSigner: false, isWritable: true},
+        {pubkey: votePubkey, isSigner: false, isWritable: false},
+        {pubkey: SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: false},
+        {
+          pubkey: SYSVAR_STAKE_HISTORY_PUBKEY,
+          isSigner: false,
+          isWritable: false,
+        },
+        {pubkey: STAKE_CONFIG_ID, isSigner: false, isWritable: false},
+        {pubkey: authorizedPubkey, isSigner: true, isWritable: false},
+      ],
+      programId: this.programId,
+      data,
+    });
+  }
+
+  /**
+   * Generate a Transaction that authorizes a new PublicKey as Staker
+   * or Withdrawer on the Stake account.
+   */
+  static authorize(
+    stakeAccount: PublicKey,
+    authorizedPubkey: PublicKey,
+    newAuthorized: PublicKey,
+    stakeAuthorizationType: StakeAuthorizationType,
+  ): Transaction {
+    const type = StakeInstructionLayout.Authorize;
+    const data = encodeData(type, {
+      newAuthorized: newAuthorized.toBuffer(),
+      stakeAuthorizationType: stakeAuthorizationType.index,
+    });
+
+    return new Transaction().add({
+      keys: [
+        {pubkey: stakeAccount, isSigner: false, isWritable: true},
+        {pubkey: SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: true},
+        {pubkey: authorizedPubkey, isSigner: true, isWritable: false},
+      ],
+      programId: this.programId,
+      data,
+    });
+  }
+
+  /**
+   * Generate a Transaction that splits Stake tokens into another stake account
+   */
+  static split(
+    stakeAccount: PublicKey,
+    authorizedPubkey: PublicKey,
+    lamports: number,
+    splitStakePubkey: PublicKey,
+  ): Transaction {
+    let transaction = SystemProgram.createAccount(
+      stakeAccount,
+      splitStakePubkey,
+      0,
+      this.space,
+      this.programId,
+    );
+    transaction.instructions[0].keys[0].isSigner = false;
+    const type = StakeInstructionLayout.Split;
+    const data = encodeData(type, {lamports});
+
+    return transaction.add({
+      keys: [
+        {pubkey: stakeAccount, isSigner: false, isWritable: true},
+        {pubkey: splitStakePubkey, isSigner: false, isWritable: true},
+        {pubkey: authorizedPubkey, isSigner: true, isWritable: false},
+      ],
+      programId: this.programId,
+      data,
+    });
+  }
+
+  /**
+   * Generate a Transaction that withdraws deactivated Stake tokens.
+   */
+  static withdraw(
+    stakeAccount: PublicKey,
+    withdrawerPubkey: PublicKey,
+    to: PublicKey,
+    lamports: number,
+  ): Transaction {
+    const type = StakeInstructionLayout.Withdraw;
+    const data = encodeData(type, {lamports});
+
+    return new Transaction().add({
+      keys: [
+        {pubkey: stakeAccount, isSigner: false, isWritable: true},
+        {pubkey: to, isSigner: false, isWritable: true},
+        {pubkey: SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: false},
+        {
+          pubkey: SYSVAR_STAKE_HISTORY_PUBKEY,
+          isSigner: false,
+          isWritable: false,
+        },
+        {pubkey: withdrawerPubkey, isSigner: true, isWritable: false},
+      ],
+      programId: this.programId,
+      data,
+    });
+  }
+
+  /**
+   * Generate a Transaction that deactivates Stake tokens.
+   */
+  static deactivate(
+    stakeAccount: PublicKey,
+    authorizedPubkey: PublicKey,
+  ): Transaction {
+    const type = StakeInstructionLayout.Deactivate;
+    const data = encodeData(type);
+
+    return new Transaction().add({
+      keys: [
+        {pubkey: stakeAccount, isSigner: false, isWritable: true},
+        {pubkey: SYSVAR_CLOCK_PUBKEY, isSigner: false, isWritable: false},
+        {pubkey: authorizedPubkey, isSigner: true, isWritable: false},
+      ],
+      programId: this.programId,
+      data,
+    });
+  }
+}
+</code></pre>
+
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(1.1.0)</span><img src="./image/esdoc-logo-mini-black.png"></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>
